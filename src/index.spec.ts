@@ -6,16 +6,9 @@
   end
 
   def test_totals
-    assert_equal(  0, price(""))
-    assert_equal( 50, price("A"))
-    assert_equal( 80, price("AB"))
-    assert_equal(115, price("CDBA"))
 
-    assert_equal(100, price("AA"))
-    assert_equal(130, price("AAA"))
-    assert_equal(180, price("AAAA"))
-    assert_equal(230, price("AAAAA"))
-    assert_equal(260, price("AAAAAA"))
+
+
 
     assert_equal(160, price("AAAB"))
     assert_equal(175, price("AAABB"))
@@ -46,4 +39,12 @@ describe('Checkout system', () => {
   expectPriceFor('', 0);
   expectPriceFor('A', 50);
   expectPriceFor('AB', 80);
+  expectPriceFor('AA', 100);
+  expectPriceFor('CDBA', 115);
+  /*
+  expectPriceFor('AAA', 130);
+  expectPriceFor('AAAA', 180);
+  expectPriceFor('AAAAA', 230);
+  expectPriceFor('AAAAAA', 230);
+  */
 });
