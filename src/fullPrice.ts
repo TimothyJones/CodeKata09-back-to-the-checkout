@@ -1,7 +1,7 @@
 import { fullPriceFor } from 'items';
-import { Item, Receipt } from 'types';
+import { Receipt } from 'types';
 
-export const calculateFullPrice = (items: Item[]): Receipt => ({
-  items,
-  price: items.reduce((acc, item) => acc + fullPriceFor(item), 0),
+export const calculateFullPrice = (receipt: Receipt): Receipt => ({
+  ...receipt,
+  price: receipt.items.reduce((acc, item) => acc + fullPriceFor(item), 0),
 });

@@ -3,9 +3,8 @@
 
 import { discountRuleCountAtPrice } from 'discounts';
 import { calculateFullPrice } from 'fullPrice';
-import { Item, Receipt, ReceiptTransformationFunction } from 'types';
-
-const unmarshalItemString = (itemString: string): Item[] => [...itemString];
+import { Receipt, ReceiptTransformationFunction } from 'types';
+import { unmarshalItemString } from 'unmarshaller';
 
 const applyReceiptRules = (
   rules: Array<ReceiptTransformationFunction>,
@@ -16,13 +15,13 @@ const applyReceiptRules = (
     receipt
   ).price;
 
-const calculateFinalPrice = (items: Item[]) =>
+const calculateFinalPrice = (receipt: Receipt) =>
   applyReceiptRules(
     [
       discountRuleCountAtPrice('B', 2, 45),
       discountRuleCountAtPrice('A', 3, 130),
     ],
-    calculateFullPrice(items)
+    calculateFullPrice(receipt)
   );
 
 export const price = (itemString: string): number =>
