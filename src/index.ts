@@ -23,13 +23,14 @@ const calculateFullPrice = (items: Item[]): Receipt => ({
   price: items.reduce((acc, item) => acc + fullPriceFor(item), 0),
 });
 
+const count = ({ items }: Receipt, item: string): number =>
+  items.reduce((acc, it) => (it === item ? 1 : 0) + acc, 0);
+
 const applyDiscountsForThreeA = (receipt: Receipt) => {
   const PRICE_FOR_THREE_A = 130;
   const discountForThreeA = 3 * fullPriceFor('A') - PRICE_FOR_THREE_A;
-  const countA = receipt.items.reduce(
-    (acc, item) => (item === 'A' ? 1 : 0) + acc,
-    0
-  );
+
+  const countA = count(receipt, 'A');
 
   return {
     ...receipt,

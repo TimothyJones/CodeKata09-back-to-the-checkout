@@ -45,4 +45,7 @@ describe('Checkout system', () => {
   expectPriceFor('AAAA', 180);
   expectPriceFor('AAAAA', 230);
   expectPriceFor('AAAAAA', 260);
+
+  expectPriceFor('AAAB', 160);
+  // expectPriceFor('AAABB', 175);
 });
