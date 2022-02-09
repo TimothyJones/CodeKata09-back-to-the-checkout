@@ -1,7 +1,9 @@
 // Tests
 //
 
-const priceFor = (item: string) => {
+import { Item, Receipt } from 'types';
+
+const fullPriceFor = (item: string) => {
   switch (item) {
     case 'A':
       return 50;
@@ -16,5 +18,27 @@ const priceFor = (item: string) => {
   }
 };
 
+const calculateFullPrice = (items: Item[]): Receipt => ({
+  items,
+  price: items.reduce((acc, item) => acc + fullPriceFor(item), 0),
+});
+
+const applyDiscountsForThreeA = (receipt: Receipt) => {
+  const PRICE_FOR_THREE_A = 130;
+  const discountForThreeA = 3 * fullPriceFor('A') - PRICE_FOR_THREE_A;
+  const countA = receipt.items.reduce(
+    (acc, item) => (item === 'A' ? 1 : 0) + acc,
+    0
+  );
+
+  return {
+    ...receipt,
+    price: receipt.price - Math.floor(countA / 3) * discountForThreeA,
+  };
+};
+
+const unmarshalItemString = (itemString: string): Item[] => [...itemString];
+
 export const price = (itemString: string): number =>
-  [...itemString].reduce((acc, item) => acc + priceFor(item), 0);
+  applyDiscountsForThreeA(calculateFullPrice(unmarshalItemString(itemString)))
+    .price;
