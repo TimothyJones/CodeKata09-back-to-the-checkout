@@ -20,7 +20,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "no-console": "error",
+    "no-console": "off",
     "import/prefer-default-export": "off",
     "@typescript-eslint/no-explicit-any": "error"
   },
