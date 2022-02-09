@@ -63,8 +63,11 @@ const applyReceiptRules = (
     receipt
   ).price;
 
-export const price = (itemString: string): number =>
+const calculateFinalPrice = (items: Item[]) =>
   applyReceiptRules(
     [applyDiscountsForTwoB, applyDiscountsForThreeA],
-    calculateFullPrice(unmarshalItemString(itemString))
+    calculateFullPrice(items)
   );
+
+export const price = (itemString: string): number =>
+  calculateFinalPrice(unmarshalItemString(itemString));
