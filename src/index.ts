@@ -1,6 +1,3 @@
-// Tests
-//
-
 import { discountRuleCountAtPrice } from 'discounts';
 import { calculateFullPrice } from 'fullPrice';
 import { Receipt, ReceiptTransformationFunction } from 'types';
