@@ -26,7 +26,9 @@ const calculateFullPrice = (items: Item[]): Receipt => ({
 const count = ({ items }: Receipt, item: string): number =>
   items.reduce((acc, it) => (it === item ? 1 : 0) + acc, 0);
 
-const applyDiscountsForThreeA = (receipt: Receipt) => {
+type ReceiptTransformationFunction = (receipt: Receipt) => Receipt;
+
+const applyDiscountsForThreeA: ReceiptTransformationFunction = (receipt) => {
   const PRICE_FOR_THREE_A = 130;
   const discountForThreeA = 3 * fullPriceFor('A') - PRICE_FOR_THREE_A;
 
@@ -52,7 +54,17 @@ const applyDiscountsForTwoB = (receipt: Receipt) => {
 
 const unmarshalItemString = (itemString: string): Item[] => [...itemString];
 
-export const price = (itemString: string): number =>
-  applyDiscountsForTwoB(
-    applyDiscountsForThreeA(calculateFullPrice(unmarshalItemString(itemString)))
+const applyReceiptRules = (
+  rules: Array<ReceiptTransformationFunction>,
+  receipt: Receipt
+) =>
+  rules.reduce(
+    (previousReceipt, discount) => discount(previousReceipt),
+    receipt
   ).price;
+
+export const price = (itemString: string): number =>
+  applyReceiptRules(
+    [applyDiscountsForTwoB, applyDiscountsForThreeA],
+    calculateFullPrice(unmarshalItemString(itemString))
+  );
