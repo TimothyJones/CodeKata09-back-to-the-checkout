@@ -1,7 +1,7 @@
 // Tests
 //
 
-import { Item, Receipt } from 'types';
+import { Item, Receipt, ReceiptTransformationFunction } from 'types';
 
 const fullPriceFor = (item: string) => {
   switch (item) {
@@ -25,8 +25,6 @@ const calculateFullPrice = (items: Item[]): Receipt => ({
 
 const count = ({ items }: Receipt, item: string): number =>
   items.reduce((acc, it) => (it === item ? 1 : 0) + acc, 0);
-
-type ReceiptTransformationFunction = (receipt: Receipt) => Receipt;
 
 const applyDiscountsForThreeA: ReceiptTransformationFunction = (receipt) => {
   const PRICE_FOR_THREE_A = 130;
