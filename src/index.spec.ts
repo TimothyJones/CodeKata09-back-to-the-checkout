@@ -44,6 +44,6 @@ const expectPriceFor = (priceString: string, expectedPrice: number) => {
 
 describe('Checkout system', () => {
   expectPriceFor('', 0);
-  //expectPriceFor('A', 50);
-  //expectPriceFor('AB', 80);
+  expectPriceFor('A', 50);
+  // expectPriceFor('AB', 80);
 });

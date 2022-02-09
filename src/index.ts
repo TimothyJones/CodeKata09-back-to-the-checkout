@@ -1,3 +1,3 @@
 // Tests
 //
-export const price = (itemString: string): number => itemString.length;
+export const price = (itemString: string): number => 50 * itemString.length;
