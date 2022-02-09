@@ -38,8 +38,21 @@ const applyDiscountsForThreeA = (receipt: Receipt) => {
   };
 };
 
+const applyDiscountsForTwoB = (receipt: Receipt) => {
+  const PRICE_FOR_TWO_B = 45;
+  const discountForTwoB = 2 * fullPriceFor('B') - PRICE_FOR_TWO_B;
+
+  const countB = count(receipt, 'B');
+
+  return {
+    ...receipt,
+    price: receipt.price - Math.floor(countB / 2) * discountForTwoB,
+  };
+};
+
 const unmarshalItemString = (itemString: string): Item[] => [...itemString];
 
 export const price = (itemString: string): number =>
-  applyDiscountsForThreeA(calculateFullPrice(unmarshalItemString(itemString)))
-    .price;
+  applyDiscountsForTwoB(
+    applyDiscountsForThreeA(calculateFullPrice(unmarshalItemString(itemString)))
+  ).price;
