@@ -36,7 +36,7 @@ import { price } from '.';
 
 const expectPriceFor = (priceString: string, expectedPrice: number) => {
   describe(`the price for "${priceString}"`, () => {
-    it('prices as 0', () => {
+    it(`prices as '${expectedPrice}'`, () => {
       expect(price(priceString)).toEqual(expectedPrice);
     });
   });
