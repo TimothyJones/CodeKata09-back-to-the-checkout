@@ -15,6 +15,7 @@
     "emitDecoratorMetadata": true,
     "declaration": true,
     "experimentalDecorators": true,
+    "downlevelIteration": true,
     "target": "es5",
     "lib": ["es5"]
   },
